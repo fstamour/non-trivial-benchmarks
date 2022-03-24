@@ -1,5 +1,6 @@
-;;; Calispel
+;;; General Setup
 (ql:quickload :trivial-benchmark)
+;;; Calispel
 (ql:quickload :calispel)
 (ql:quickload :eager-future2)
 
@@ -22,10 +23,6 @@ bytes-consed     1000000  1013893328  0         11232800  0         1013.8933  1
 eval-calls       1000000  0           0         0         0         0          0.0
 |#
 ;;;; Multi Message
-(ql:quickload :trivial-benchmark)
-(ql:quickload :calispel)
-(ql:quickload :eager-future2)
-
 (defparameter *chan*
   (make-instance 'calispel:channel))
 
@@ -55,21 +52,29 @@ eval-calls       1000000  0           0         0         0         0         0.
 
 
 ;;; lparallels
-(ql:quickload :trivial-benchmark)
 (ql:quickload :lparallel)
 
+;; Not sure how this should be handled in benchmarking
 (setf lparallel:*kernel* (lparallel:make-kernel 8))
 
 (defparameter *chan* (lparallel:make-channel))
-(trivial-benchmark:with-timing (1000000)
+(benchmark:with-timing (1000000)
   (let ((lparallel:*task-category* 'my-stuff))
     (lparallel:submit-task *chan* #'(lambda () 42)))
   (lparallel:receive-result *chan*))
+#|
+-                samples  total      minimum  maximum   median    average    deviation
+real-time        1000000  12.480038  0        0.06      0         0.000012   0.000392
+run-time         1000000  96.76701   0        0.285451  0.000008  0.000097   0.002414
+user-run-time    1000000  90.52401   0        0.285451  0.000007  0.000091   0.002315
+system-run-time  1000000  4.504161   0        0.019549  0         0.000005   0.000198
+page-faults      1000000  0          0        0         0         0          0.0
+gc-run-time      1000000  116.296    0        62.044    0         0.000116   0.067153
+bytes-consed     1000000  249428384  0        65536     0         249.42839  2845.9097
+eval-calls       1000000  0          0        0         0         0          0.0
+|#
 
 ;;;; Multi Message
-(ql:quickload :trivial-benchmark)
-(ql:quickload :lparallel)
-
 (setf lparallel:*kernel* (lparallel:make-kernel 8))
 
 (defparameter *chan* (lparallel:make-channel))
@@ -78,7 +83,7 @@ eval-calls       1000000  0           0         0         0         0         0.
 
 (benchmark:with-timing (1000000)
   (lparallel:submit-task
-   ,*chan*
+   *chan*
    #'(lambda ()
        (loop
 	 :initially (lparallel.queue:push-queue 10 *q*)
@@ -105,7 +110,6 @@ eval-calls       1000000  0          0         0         0         0         0.0
 |#
 
 ;;; Green-threads
-(ql:quickload :trivial-benchmark)
 (ql:quickload :green-threads)
 
 (defparameter *chan* (make-instance 'gt:channel))
@@ -129,9 +133,6 @@ bytes-consed     1000000  2286751232  0         6638048   0         2286.7512  1
 eval-calls       1000000  0           0         0         0         0          0.0
 |#
 ;;;; Multi Message
-(ql:quickload :trivial-benchmark)
-(ql:quickload :green-threads)
-
 (defparameter *chan* (make-instance 'gt:channel))
 
 (benchmark:with-timing (1000000)
@@ -155,5 +156,4 @@ page-faults      1000000  0           0        0         0         0         0.0
 gc-run-time      1000000  827.324     0        57.824    0         0.000827  0.106816
 bytes-consed     1000000  8889297472  0        6625408   0         8889.298  16661.602
 eval-calls       1000000  0           0        0         0         0         0.0
-
 |#
