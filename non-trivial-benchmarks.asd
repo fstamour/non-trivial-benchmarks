@@ -29,7 +29,8 @@
                #3:green-threads)
   :pathname "src/channels"
   :components
-  ((:file "calispel")))
+  ((:file "calispel")
+   (:file "lparallel")))
 
 (defsystem #:non-trivial-benchmarks
   :name "non-trivial-benchmarks"
