@@ -22,15 +22,14 @@
            "Gavin Freeborn")
   :licence "MIT License"
   :description "Benchmarking libraries that provide channels"
-  :depends-on (;; for benchmarking
-               #:trivial-benchmark
-               ;; Utilities
-               #:alexandria
-               ;; Logging
-               #:log4cl)
+  :depends-on (#:non-trivial-benchmarks/common
+               #:eager-future2
+               #:calispel
+               #:lparallel
+               #3:green-threads)
   :pathname "src/channels"
   :components
-  (#+nil(:file "channels")))
+  ((:file "calispel")))
 
 (defsystem #:non-trivial-benchmarks
   :name "non-trivial-benchmarks"

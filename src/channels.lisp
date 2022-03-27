@@ -1,58 +1,5 @@
-;;; General Setup
-(ql:quickload :trivial-benchmark)
-;;; Calispel
-(ql:quickload :calispel)
-(ql:quickload :eager-future2)
-
-(defparameter *chan*
-  (make-instance 'calispel:channel))
-
-(benchmark:with-timing (1000000)
-  (eager-future2:pexec
-    (calispel:! *chan* 42))
-  (calispel:? *chan*))
-#|
--                samples  total       minimum   maximum   median    average    deviation
-real-time        1000000  15.090046   0         0.1       0         0.000015   0.000411
-run-time         1000000  26.975489   0.000006  0.094754  0.000018  0.000027   0.000213
-user-run-time    1000000  13.261213   0         0.092004  0.000014  0.000013   0.000151
-system-run-time  1000000  14.109874   0         0.019929  0.000007  0.000014   0.000135
-page-faults      1000000  0           0         0         0         0          0.0
-gc-run-time      1000000  507.735     0         93.44     0         0.000508   0.150308
-bytes-consed     1000000  1013893328  0         11232800  0         1013.8933  12756.485
-eval-calls       1000000  0           0         0         0         0          0.0
-|#
-;;;; Multi Message
-(defparameter *chan*
-  (make-instance 'calispel:channel))
-
-(benchmark:with-timing (1000000)
-  (eager-future2:pexec ()
-    (loop
-      :initially (calispel:! *chan* 10)
-      :repeat 5
-      :do (calispel:! *chan* (+ 10 (calispel:? *chan*)))))
-  (loop
-    :repeat 5
-    :do (calispel:! *chan* (+ 10 (calispel:? *chan*)))
-    :finally (calispel:? *chan*)))
-
-#|
--                samples  total       minimum   maximum   median    average   deviation
-real-time        1000000  77.49031    0         0.050001  0         0.000077  0.000882
-run-time         1000000  110.03609   0.000033  0.051525  0.000091  0.00011   0.00022
-user-run-time    1000000  59.89902    0         0.051527  0.000059  0.00006   0.000147
-system-run-time  1000000  50.67493    0         0.028984  0.000035  0.000051  0.000157
-page-faults      1000000  0           0         0         0         0         0.0
-gc-run-time      1000000  892.176     0         50.171    0         0.000892  0.126727
-bytes-consed     1000000  4418523024  0         11263232  0         4418.523  18450.777
-eval-calls       1000000  0           0         0         0         0         0.0
-|#
-#+end_src
-
 
 ;;; lparallels
-(ql:quickload :lparallel)
 
 ;; Not sure how this should be handled in benchmarking
 (setf lparallel:*kernel* (lparallel:make-kernel 8))
@@ -110,7 +57,6 @@ eval-calls       1000000  0          0         0         0         0         0.0
 |#
 
 ;;; Green-threads
-(ql:quickload :green-threads)
 
 (defparameter *chan* (make-instance 'gt:channel))
 
