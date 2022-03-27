@@ -1,9 +1,9 @@
 (defpackage #:non-trivial-benchmarks/channels/calispel
   (:use :cl)
 
-  ;; TODO I disabled these test because they deadlocked on my
+  ;; TODO I disabled these tests because they deadlocked on my
   ;; computer...  for run1, if I decreased n by 10x (remove a 0) then
-  ;; it runs in under a second. It fells like perhaps the test is
+  ;; it runs in under a second. It feels like perhaps the test is
   ;; creating too many threads?
   #+ (or)
   (:export

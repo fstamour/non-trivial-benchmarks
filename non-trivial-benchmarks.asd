@@ -26,7 +26,7 @@
                #:eager-future2
                #:calispel
                #:lparallel
-               #3:green-threads)
+               #:green-threads)
   :pathname "src/channels"
   :components
   ((:file "calispel")

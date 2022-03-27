@@ -6,7 +6,7 @@
 
 (defun compute-metrics (timer computations)
   `((:name ,@computations)
-    ,(loop :for metric :in (benchmark:metrics *timer*)
+    ,(loop :for metric :in (benchmark:metrics timer)
            :collect (append (list metric)
                             (benchmark:compute computations metric)))))
 
