@@ -12,7 +12,7 @@
                ;; Logging
                #:log4cl)
   :pathname "src"
-  :components ())
+  :components ((:file "utils")))
 
 (defsystem #:non-trivial-benchmarks/channels
   :name "non-trivial-benchmarks"
