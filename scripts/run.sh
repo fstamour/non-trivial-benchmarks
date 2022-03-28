@@ -5,6 +5,7 @@
 # This script serves has documentation more than anything.
 #
 
-sbcl --eval '(asdf:load-system :non-trivial-benchmarks)' \
+sbcl --load ".qlot/setup.lisp" \
+     --eval '(ql:quickload :non-trivial-benchmarks)' \
      --eval '(non-trivial-benchmarks:run)' \
      --quit
