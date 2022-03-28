@@ -25,22 +25,35 @@
                 (string-downcase (symbol-name symbol))))
           :collect symbol))
 
+(defun benchmark-name (fn)
+  (concatenate 'string
+               (package-name
+                (symbol-package fn))
+               ":"
+               (symbol-name fn)))
+
+(defun benchmark-description (fn)
+  (documentation fn 'function))
+
 (defun validate-benchmarks ()
   (loop :for package :in (find-benchmark-packages)
         :do (loop :for fn :in (find-benchmarks package)
-                  :unless (documentation fn 'function)
-                    :do (warn "~a:~a is missing a docstring"
-                              (package-name (symbol-package fn))
-                              fn))))
+                  :unless (benchmark-description fn)
+                    :do (warn "~a is missing a docstring"
+                              (benchmark-name fn)))))
 
 (defun run ()
   "Run all exported benchmarks."
   (validate-benchmarks)
   (loop :for package :in (find-benchmark-packages)
         :do
-           (format t "~&Running benchmarks in the ~a package..." package)
+           (format t "~&~tRunning benchmarks in the ~a package..."
+                   (package-name package))
            (loop :for fn :in (find-benchmarks package)
                  :do
-                    (format t "~&Running the benchmark ~a..." fn)
+                    (format t "~&~2t~a~%~
+                               ~3t~a..."
+                            (benchmark-name fn)
+                            (benchmark-description fn))
                     (finish-output)
                     (funcall fn))))
