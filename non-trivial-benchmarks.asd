@@ -30,7 +30,8 @@
   :pathname "src/channels"
   :components
   ((:file "calispel")
-   (:file "lparallel")))
+   (:file "lparallel")
+   (:file "green-threads")))
 
 (defsystem #:non-trivial-benchmarks
   :name "non-trivial-benchmarks"
