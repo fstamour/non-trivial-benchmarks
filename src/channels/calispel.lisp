@@ -1,15 +1,8 @@
-(defpackage #:non-trivial-benchmarks/channels/calispel
-  (:use :cl)
+;;;; These benchmarks are not exported, so they're effectively
+;;;; disabled. I disabled them because they deadlock.
 
-  ;; TODO I disabled these tests because they deadlocked on my
-  ;; computer...  for run1, if I decreased n by 10x (remove a 0) then
-  ;; it runs in under a second. It feels like perhaps the test is
-  ;; creating too many threads?
-  #+ (or)
-  (:export
-   ;; TODO find much much better names :P
-   #:run1
-   #:run2))
+(defpackage #:non-trivial-benchmarks/channels/calispel
+  (:use :cl))
 
 (in-package #:non-trivial-benchmarks/channels/calispel)
 
@@ -24,7 +17,6 @@ calispel."
       (eager-future2:pexec
         (calispel:! chan 42))
       (calispel:? chan))))
-
 
 (defun run-multiple-messages (&optional (n 1000000))
   "Sending and receiving 5 message at a time between two threads using
