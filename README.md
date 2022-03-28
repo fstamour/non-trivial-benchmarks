@@ -17,7 +17,7 @@ ros install qlot
 
 Then ensure qlot is in your path
 
-Then install the dependancies using
+Then install the dependencies using
 
 ```bash
 qlot install
@@ -34,5 +34,5 @@ Simply start up a repl at the root directory then in the repl run
 
 ## Running the benchmark
 
-If the dependancies where installed correctly you can run the
+If the dependencies were installed correctly you can run the
 benchmarks by running `make` in the root directory.
