@@ -4,3 +4,12 @@
 
 Benchmarks targeting Common Lisp implementations. Converted from the
 canonical common-lisp.net SVN repository.
+
+** [[https://github.com/TechEmpower/FrameworkBenchmarks][TechEmpower/FrameworkBenchmarks]]
+
+> This project provides representative performance measures across a
+wide field of **web** application frameworks.
+
+(Emphasis mine)
+
+[[https://github.com/TechEmpower/FrameworkBenchmarks/tree/master/frameworks/Lisp][Lisp benchmarks]]
