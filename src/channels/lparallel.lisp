@@ -35,7 +35,7 @@ message from appearing in the future (N is the number of workers):
   (let ((chan (lparallel:make-channel))
         (q1 (lparallel.queue:make-queue))
         (q2 (lparallel.queue:make-queue)))
-    (benchmark:with-timing (1000000)
+    (benchmark:with-timing (n)
       (lparallel:submit-task
        chan
        #'(lambda ()

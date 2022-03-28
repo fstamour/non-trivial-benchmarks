@@ -4,6 +4,8 @@
 
 (in-package #:non-trivial-benchmarks/utils)
 
+;; This is not used yet, it will probably change when I know more
+;; precisely what information I need
 (defun compute-metrics (timer computations)
   `((:name ,@computations)
     ,(loop :for metric :in (benchmark:metrics timer)
