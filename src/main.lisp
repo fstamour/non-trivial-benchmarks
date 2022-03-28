@@ -33,7 +33,8 @@
                (symbol-name fn)))
 
 (defun benchmark-description (fn)
-  (documentation fn 'function))
+  (when (documentation fn 'function)
+    (remove #\Newline (documentation fn 'function))))
 
 (defun validate-benchmarks ()
   (loop :for package :in (find-benchmark-packages)

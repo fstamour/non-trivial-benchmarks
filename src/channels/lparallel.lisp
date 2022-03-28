@@ -1,10 +1,5 @@
 (defpackage #:non-trivial-benchmarks/channels/lparallel
-  (:use :cl)
-  (:export
-   ;; TODO find much much better name :P
-   #:run
-   #:run2
-   ))
+  (:use :cl))
 
 (in-package #:non-trivial-benchmarks/channels/lparallel)
 
@@ -25,28 +20,36 @@ message from appearing in the future (N is the number of workers):
 ;; Maybe find a more sensible value than 8, but what?
 (setf lparallel:*kernel* (lparallel:make-kernel 8))
 
-(defun run (&optional (n 1000000))
-  (benchmark:with-timing (n)
-    (let ((chan (lparallel:make-channel)))
-      (lparallel:submit-task chan #'(lambda () 42))
-      (lparallel:receive-result chan))))
+(export
+ (defun run-single-message (&optional (n 1000000))
+   "Running a simple task using lparallel's worker threads and wait for
+its result"
+   (benchmark:with-timing (n)
+     (let ((chan (lparallel:make-channel)))
+       (lparallel:submit-task chan #'(lambda () 42))
+       (lparallel:receive-result chan)))))
 
-(defun run2 (&optional (n 1000000))
-  (let ((chan (lparallel:make-channel))
-        (q1 (lparallel.queue:make-queue))
-        (q2 (lparallel.queue:make-queue)))
-    (benchmark:with-timing (n)
-      (lparallel:submit-task
-       chan
-       #'(lambda ()
-           (loop
-             :initially (lparallel.queue:push-queue 10 q1)
-             :repeat 5
-             :do (lparallel.queue:push-queue
-                  (+ 10 (lparallel.queue:pop-queue q2)) q1))))
-      (loop
-        :repeat 5
-        :do (lparallel.queue:push-queue
-             (+ 10 (lparallel.queue:pop-queue q1)) q2)
-        :finally (lparallel.queue:pop-queue q1))
-      (lparallel:receive-result chan))))
+(export
+ (defun run-multiple-messages (&optional (n 1000000))
+   "Running a task using lparallel's worker threads to do simple math,
+using two queues for communicating the results."
+   (let ((chan (lparallel:make-channel))
+         (send-queue (lparallel.queue:make-queue))
+         (recv-queue (lparallel.queue:make-queue)))
+     (benchmark:with-timing (n)
+       (lparallel:submit-task
+        chan
+        #'(lambda ()
+            (loop
+              :initially (lparallel.queue:push-queue 10 send-queue)
+              :repeat 5
+              :do (lparallel.queue:push-queue
+                   (+ 10 (lparallel.queue:pop-queue recv-queue))
+                   send-queue))))
+       (loop
+         :repeat 5
+         :do (lparallel.queue:push-queue
+              (+ 10 (lparallel.queue:pop-queue send-queue))
+              recv-queue)
+         :finally (lparallel.queue:pop-queue send-queue))
+       (lparallel:receive-result chan)))))

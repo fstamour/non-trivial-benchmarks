@@ -13,8 +13,9 @@
 
 (in-package #:non-trivial-benchmarks/channels/calispel)
 
-(defun run1 (&optional (n 1000000))
-  "TODO Put a nice description here."
+(defun run-single-message (&optional (n 1000000))
+  "Sending and receiving 1 message at a time between two threads using
+calispel."
   (let ((chan
           (make-instance 'calispel:channel)))
     ;; TODO we should not include the thread creation in the
@@ -25,9 +26,9 @@
       (calispel:? chan))))
 
 
-(defun run2 (&optional (n 1000000))
-  "TODO Put a nice description here.
-Same as run, but send multiple message at a time."
+(defun run-multiple-messages (&optional (n 1000000))
+  "Sending and receiving 5 message at a time between two threads using
+calispel, doing simple math on the messages."
   (let ((chan
           (make-instance 'calispel:channel)))
     (benchmark:with-timing (n)

@@ -16,7 +16,8 @@
 
 (export
  (defun run-multiple-messages (&optional (n 1000000))
-   "Sending and receiving 5 message at a time with green-threads."
+   "Sending and receiving 5 message at a time with green-threads,
+doing simple math on the messages."
    (let ((chan (make-instance 'gt:channel)))
      (benchmark:with-timing (n)
        (gt:with-green-thread
