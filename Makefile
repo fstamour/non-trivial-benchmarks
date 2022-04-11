@@ -8,3 +8,7 @@ all: run
 .PHONY: run
 run: .qlot/setup.lisp
 	./scripts/run.sh
+
+.PHONY: clean
+clean:
+	rm -rf .qlot
