@@ -5,6 +5,10 @@
 Benchmarks targeting Common Lisp implementations. Converted from the
 canonical common-lisp.net SVN repository.
 
+*** TODO Integrate cl-ppcre test
+
+https://gitlab.common-lisp.net/ansi-test/cl-bench/-/commit/64314dbefb296e0154742e504a21464cb515c2ac
+
 ** [[https://github.com/TechEmpower/FrameworkBenchmarks][TechEmpower/FrameworkBenchmarks]]
 
 > This project provides representative performance measures across a
@@ -13,3 +17,5 @@ wide field of **web** application frameworks.
 (Emphasis mine)
 
 [[https://github.com/TechEmpower/FrameworkBenchmarks/tree/master/frameworks/Lisp][Lisp benchmarks]]
+
+** TODO https://lparallel.org/benchmarks/
