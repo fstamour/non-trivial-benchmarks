@@ -4,7 +4,7 @@
 
 (export
  (defun run-insertion-alist (&optional (n 1000000))
-   "Sequencially inserting values into an alist"
+   "Sequentially inserting values into an alist"
    (declare (type fixnum n))
    (let* ((ht '())
           (random-list (loop :repeat n

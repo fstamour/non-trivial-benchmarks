@@ -4,7 +4,7 @@
 
 (export
  (defun run-insertion-plist (&optional (n 1000000))
-   "Sequencially inserting values into an plist"
+   "Sequentially inserting values into an plist"
    (declare (type fixnum n))
    (let* ((ht '())
           (random-list (loop :repeat n
@@ -12,7 +12,8 @@
                              :collect i)))
      (benchmark:with-timing (n)
                             (loop :for i :in random-list
-                                  :do (push (cons i i) ht))))))
+                                  :do (progn (push i ht)
+                                             (push i ht)))))))
 
 
 (export
@@ -25,7 +26,8 @@
                              :collect i)))
      ;; Initialize Values
      (loop :for i :in random-list
-           :do (push (cons i i) ht))
+           :do (progn (push i ht)
+                      (push i ht)))
      (benchmark:with-timing (n)
                             (loop :for i :in random-list
-                                  :do (assoc i ht))))))
+                                  :do (getf ht i))))))

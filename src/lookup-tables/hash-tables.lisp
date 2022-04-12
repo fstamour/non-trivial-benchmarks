@@ -4,7 +4,7 @@
 
 (export
  (defun run-insertion (&optional (n 1000000))
-   "Sequencially inserting values into an hash-table"
+   "Sequentially inserting values into an hash-table"
    (declare (type fixnum n))
    (let* ((ht (make-hash-table))
           (random-list (loop :repeat n
