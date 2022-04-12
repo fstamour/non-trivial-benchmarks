@@ -1,8 +1,8 @@
 (defsystem #:non-trivial-benchmarks/common
   :name "non-trivial-benchmarks"
   :version "0"
-  :maintainer "Francis St-Amour"
-  :author ("Francis St-Amour")
+  :maintainer "Francis St-Amour <fr.stamour@gmail.com>"
+  :author ("Francis St-Amour <fr.stamour@gmail.com>")
   :licence "MIT License"
   :description "Utilities and libraries common to some benchmarks"
   :depends-on (;; for benchmarking
@@ -17,9 +17,9 @@
 (defsystem #:non-trivial-benchmarks/channels
   :name "non-trivial-benchmarks"
   :version "0"
-  :maintainer "Francis St-Amour"
-  :author ("Francis St-Amour"
-           "Gavin Freeborn")
+  :maintainer "Francis St-Amour <fr.stamour@gmail.com>"
+  :author ("Francis St-Amour <fr.stamour@gmail.com>"
+           "Gavin Jaeger-Freeborn <gavinfreeborn@gmail.com>")
   :licence "MIT License"
   :description "Benchmarking libraries that provide channels"
   :depends-on (#:non-trivial-benchmarks/common
@@ -53,8 +53,8 @@
 (defsystem #:non-trivial-benchmarks
   :name "non-trivial-benchmarks"
   :version "0"
-  :maintainer "Francis St-Amour"
-  :author ("Francis St-Amour")
+  :maintainer "Francis St-Amour <fr.stamour@gmail.com>"
+  :author ("Francis St-Amour <fr.stamour@gmail.com>")
   :licence "MIT License"
   :description "Some benchmarks to compare libraries and techniques"
   :depends-on (#:non-trivial-benchmarks/channels
