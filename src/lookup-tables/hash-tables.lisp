@@ -3,7 +3,7 @@
 (in-package #:non-trivial-benchmarks/lookup-tables/hash-tables)
 
 (export
- (defun run-insertion (&optional (n 1000000))
+ (defun run-insertion-hash-table (&optional (n 1000000))
    "Sequentially inserting values into an hash-table"
    (declare (type fixnum n))
    (let* ((ht (make-hash-table))
@@ -15,7 +15,7 @@
                                   :do (setf (gethash i ht) i))))))
 
 (export
- (defun run-lookup (&optional (n 1000000))
+ (defun run-lookup-hash-table (&optional (n 1000000))
    "Looking up values in an hash-table"
    (declare (type fixnum n))
    (let* ((ht (make-hash-table))
