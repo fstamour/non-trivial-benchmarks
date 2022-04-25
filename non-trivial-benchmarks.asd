@@ -41,12 +41,14 @@
            "Gavin Freeborn")
   :licence "MIT License"
   :description "Benchmarking Lookup and Insertion for different forms of lookup tables"
-  :depends-on (#:non-trivial-benchmarks/common)
+  :depends-on (#:non-trivial-benchmarks/common
+               #:fset)
   :pathname "src/lookup-tables"
   :components
   ((:file "hash-tables")
    (:file "alists")
-   (:file "plists")))
+   (:file "plists")
+   (:file "fset")))
 
 (defsystem #:non-trivial-benchmarks
   :name "non-trivial-benchmarks"
