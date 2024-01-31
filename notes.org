@@ -2,6 +2,8 @@
 
 ** [[https://gitlab.common-lisp.net/ansi-test/cl-bench][cl-bench]]
 
+https://cl-bench.common-lisp.dev/
+
 Benchmarks targeting Common Lisp implementations. Converted from the
 canonical common-lisp.net SVN repository.
 

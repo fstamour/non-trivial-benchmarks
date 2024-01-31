@@ -1,3 +1,4 @@
+
 # non-trivial-benchmarks
 
 Some Common lisp benchmarks to compare libraries and techniques.
@@ -38,3 +39,10 @@ Simply start up a repl at the root directory then in the repl run
 
 If the dependencies were installed correctly you can run the
 benchmarks by running `make` in the root directory.
+
+## How does non-trivial-benchmarks differ from [cl-bench](https://gitlab.common-lisp.net/ansi-test/cl-bench)?
+
+- cl-bench contains benchmarks aimed at comparing the performances of
+  _different_ common lisp implementations, whereas
+- non-trivial-benchmarks aims to compare different techniques,
+  methodologies, algorithms, etc within the same lisp implementation.
