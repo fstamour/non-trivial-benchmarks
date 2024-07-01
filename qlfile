@@ -1,8 +1,0 @@
-ql log4cl
-ql trivial-benchmark
-ql alexandria
-ql eager-future2
-ql calispel
-ql lparallel
-ql green-threads
-ql fset
