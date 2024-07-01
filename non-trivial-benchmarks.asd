@@ -8,30 +8,9 @@
   :depends-on (;; for benchmarking
                #:trivial-benchmark
                ;; Utilities
-               #:alexandria
-               ;; Logging
-               #:log4cl)
+               #:alexandria)
   :pathname "src"
   :components ((:file "utils")))
-
-(defsystem #:non-trivial-benchmarks/channels
-  :name "non-trivial-benchmarks"
-  :version "0"
-  :maintainer "Francis St-Amour <fr.stamour@gmail.com>"
-  :author ("Francis St-Amour <fr.stamour@gmail.com>"
-           "Gavin Jaeger-Freeborn <gavinfreeborn@gmail.com>")
-  :licence "MIT License"
-  :description "Benchmarking libraries that provide channels"
-  :depends-on (#:non-trivial-benchmarks/common
-               #:eager-future2
-               #:calispel
-               #:lparallel
-               #:green-threads)
-  :pathname "src/channels"
-  :components
-  ((:file "calispel")
-   (:file "lparallel")
-   (:file "green-threads")))
 
 (defsystem #:non-trivial-benchmarks/lookup-tables
   :name "non-trivial-benchmarks"
