@@ -1,0 +1,28 @@
+#+title: non-trivial-benchmarks
+
+Some Common lisp benchmarks to compare libraries and techniques.
+
+* Getting started
+
+#+begin_src shell
+git clone https://github.com/fstamour/non-trivial-benchmarks.git ~/quicklisp/local-projects/
+#+end_src
+
+** Running the benchmarks
+
+#+begin_src lisp
+(ql:quickload :non-trivial-benchmarks)
+(non-trivial-benchmarks:run)
+#+end_src
+
+* How does =non-trivial-benchmarks= differ from [[https://gitlab.common-lisp.net/ansi-test/cl-bench][cl-bench]]?
+
+- =cl-bench= contains benchmarks aimed at comparing the performances of
+  _different_ common lisp implementations, whereas
+- =non-trivial-benchmarks= aims to compare different techniques,
+  methodologies, algorithms, etc within the same lisp implementation.
+
+* See also
+
+- [[file:notes.org][notes.org]]
+- Blog post by Collin Woodbury ([[https://github.com/fosskers][@fosskers]]) [[https://www.fosskers.ca/en/blog/optimizing-common-lisp][Optimizing Common Lisp]]
