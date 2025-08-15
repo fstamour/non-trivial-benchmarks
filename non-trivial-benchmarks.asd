@@ -36,7 +36,6 @@
   :author ("Francis St-Amour <fr.stamour@gmail.com>")
   :licence "MIT License"
   :description "Some benchmarks to compare libraries and techniques"
-  :depends-on (#:non-trivial-benchmarks/channels
-               #:non-trivial-benchmarks/lookup-tables)
+  :depends-on (#:non-trivial-benchmarks/lookup-tables)
   :pathname "src"
   :components ((:file "main")))
